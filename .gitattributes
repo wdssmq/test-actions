@@ -4,5 +4,5 @@
 PicGo/                                export-ignore
 _posts/*/                             export-ignore
 _posts/*.md                           export-ignore
-!_posts/1970-01-01-empty.md            export-subst
+\!_posts/1970-01-01-empty.md            export-subst
 _posts_logs.json                      export-ignore
