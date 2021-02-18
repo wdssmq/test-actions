@@ -38,10 +38,9 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ZIP_NAME: ${{ env.ZIP_NAME }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./${ZIP_NAME}.zip
           asset_name: ${ZIP_NAME}.zip
           asset_content_type: application/zip
-        env:
-          ZIP_NAME: ${{ env.ZIP_NAME }}
