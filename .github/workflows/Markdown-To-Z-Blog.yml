@@ -29,8 +29,9 @@ jobs:
         #   _file_changes: ${{ steps.file_changes.outputs.files }}
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
-          command: install -d # Install all dependencies, including development ones
-          command: run build
+          command: |
+            install -d # Install all dependencies, including development ones
+            run build
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
