@@ -12,29 +12,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2 # Checking out the repo
-      - name: Install dependecies
-        uses: VaultVulp/action-pipenv@v2.0.1
-        with:
-          command: install -d # Install all dependencies, including development ones
       - name: Get file changes
         id: file_changes
         uses: trilom/file-changes-action@v1.2.4
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           # output: '" "'
-      - name: _cache_logs
+      - name: _file_changes
         env:
-          _cache_logs: ${{ steps.file_changes.outputs.files }}
+          _file_changes: ${{ steps.file_changes.outputs.files }}
         run: |
-          echo ${_cache_logs}
-      - name: Build
-        env:
-          API_USR: ${{ secrets.API_USR }}
-          API_PWD: ${{ secrets.API_PWD }}
-          API_URL: ${{ secrets.API_URL }}
-          _cache_logs: ${{ steps.file_changes.outputs.files }}
+          echo ${_file_changes}
+      - name: Python Build
+        # env:
+        #   _file_changes: ${{ steps.file_changes.outputs.files }}
         uses: VaultVulp/action-pipenv@v2.0.1
         with:
+          command: install -d # Install all dependencies, including development ones
           command: run build
       - name: Commit files
         run: |
