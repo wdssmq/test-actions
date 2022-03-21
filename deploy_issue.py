@@ -38,8 +38,8 @@ count = [0, 0, 0]
 
 for post in add_posts:
     file_path = POST_DIR + post["title"] + ".md"
-    print (file_path)
-    print (post["title"])
+    # print (file_path)
+    # print (post["title"])
     with open(file_path, "w") as f:
         f.write(post["body"])
     os.system("git add " + file_path + " >/dev/null 2>&1")
