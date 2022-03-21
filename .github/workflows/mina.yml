@@ -1,0 +1,63 @@
+name: mina
+on:
+  push:
+    branches:
+      - main
+      - master
+      - test
+
+jobs:
+  push:
+    runs-on: ubuntu-20.04
+    env:
+      TZ: Asia/Shanghai # https://xirikm.net/2020/215-1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3 # Checking out the repo
+      - name: python
+        run: |
+          echo ${{ github.ref }}
+          git branch -a
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          python3 deploy_issue.py ${{secrets.REPO}} "source/_post/" ${{secrets.GITHUB_TOKEN}} > r
+          if [[ -s r ]]; then
+              git commit -m "$(cat r)" --allow-empty
+              git push --set-upstream origin master
+              while ! git push
+              do
+                  git pull
+              done
+          fi
+          cd "source/_post"
+          ls -la
+      # - name: Get file changes
+      #   id: file_changes
+      #   uses: trilom/file-changes-action@v1.2.4
+      #   with:
+      #     githubToken: ${{ secrets.GITHUB_TOKEN }}
+      #     # output: '" "'
+      # - name: _file_changes
+      #   env:
+      #     _file_changes: ${{ steps.file_changes.outputs.files }}
+      #   run: |
+      #     echo ${_file_changes}
+      # - name: Python Build
+      #   # env:
+      #   #   _file_changes: ${{ steps.file_changes.outputs.files }}
+      #   uses: VaultVulp/action-pipenv@v2.0.1
+      #   with:
+      #     command: |
+      #       install -d # Install all dependencies, including development ones
+      #       run build
+      # - name: Commit files
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
+      #     git status
+      #     git diff-index --quiet HEAD || (git commit -m "Auto Commit" -a --no-verify)
+      # - name: Push changes
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }}
