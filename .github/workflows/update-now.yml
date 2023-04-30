@@ -1,0 +1,22 @@
+name: Update update.txt
+
+on:
+  push:
+    branches:
+      - act-note
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Update update.txt
+        run: |
+          now=$(date +"%Y-%m-%d %H:%M:%S")
+          echo $now > ./update.txt
+          git add ./update.txt
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Update update.txt to $now"
+          git push origin act-note
