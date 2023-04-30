@@ -6,6 +6,10 @@
 
 需要先安装好 Docker，然后安装 act；
 
+> nektos/act: Run your GitHub Actions locally 🚀：
+> 
+> [https://github.com/nektos/act](https://github.com/nektos/act "nektos/act: Run your GitHub Actions locally 🚀")
+
 ### 克隆本仓库或者使用你自己的仓库
 
 ```bash
@@ -48,6 +52,7 @@ act -l
 # 执行 update 任务
 act -j update
 
-# 首次执行需要选择并拉取 Docker 镜像，三个选项大小不一样，文件越大支持的动作越多
-
 ```
+
+首次执行需要选择并拉取 Docker 镜像，三个选项大小不一样，文件越大支持的动作越多；
+
