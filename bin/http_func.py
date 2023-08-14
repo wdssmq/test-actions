@@ -47,3 +47,11 @@ def http_git_issues(labels="pick", repo="", token=""):
     res_data = http({"url": url, "method": "get"}, headers_arg=headers)
     # fnLog(res_data.json(), inspect.currentframe().f_lineno)
     return res_data.json()
+
+def http_git_issues_comments(comments_url, token=""):
+    """获取 issue comments 列表"""
+    url = comments_url
+    headers = http_git_headers(token)
+    res_data = http({"url": url, "method": "get"}, headers_arg=headers)
+    # fnLog(res_data.json(), inspect.currentframe().f_lineno)
+    return res_data.json()

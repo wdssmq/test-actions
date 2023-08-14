@@ -1,8 +1,10 @@
 """ GitHub 数据处理 """
 import inspect
+import yaml
+import re
 
 from bin.base import fnBug
-from bin.http_func import http_git_issues
+from bin.http_func import http_git_issues, http_git_issues_comments
 
 # 全局变量
 config_info = {}
@@ -18,24 +20,80 @@ def git_func_init(config, debug):
     debug_info = debug
 
 
+# 抓取 issues 或 issue comments 封装
+def git_func_issues(comments_url=None):
+    """抓取 issues 或 issue comments 封装"""
+    if comments_url is None:
+        issues = http_git_issues(
+            config_info["PICK_LABEL"],
+            config_info["GIT_REPO"],
+            config_info["GITHUB_TOKEN"],
+        )
+    else:
+        issues = http_git_issues_comments(comments_url, config_info["GITHUB_TOKEN"])
+    return issues
+
+
+pick_keys_info = {
+    "issues": ["url", "html_url", "title", "body", "comments_url"],
+    "comments": ["url", "html_url", "body"],
+}
+
+
 # 选出需要的字段
-def filter_issues(pick_keys=None):
+def filter_issues(list_data, list_type="issues"):
     """选出需要的字段"""
-    issues = http_git_issues(
-        config_info["PICK_LABEL"], config_info["GIT_REPO"], config_info["GITHUB_TOKEN"]
-    )
-    if pick_keys is None:
-        return issues
-    # 对于每个 issue，只保留需要的字段
     list_result = []
-    for issue in issues:
-        dict_issue = {}
-        for key in pick_keys:
-            dict_issue[key] = issue[key]
-        list_result.append(dict_issue)
-    fnBug(list_result, inspect.currentframe().f_lineno, debug_info["debug"])
+    for item_data in list_data:
+        item_result = {}
+        for key in pick_keys_info[list_type]:
+            item_result[key] = item_data[key]
+        list_result.append(item_result)
     return list_result
 
+
+# 从 issue 的 body 中提取信息
+def extract_info(body):
+    """从 issue 的 body 中提取信息"""
+    # 匹配 ```yml ... ``` 中的内容
+    yaml_str = re.search(r"```yml(.*?)```", body, re.S).group(1)
+    # 将 yaml 字符串转换为字典
+    dict_info = yaml.safe_load(yaml_str)
+    return dict_info
+
+
+# 保存数据到文件
+def save_data(data):
+    """保存数据到文件"""
+    file_name = data["issues_title"].replace(" ", "_") + ".yml"
+    file_path = config_info["DATA_PATH"] + file_name
+    # 保存到文件
+    with open(file_path, "w", encoding="utf-8") as file:
+        yaml.dump(data, file, allow_unicode=True)
+    fnBug(f"保存文件：{file_path}", inspect.currentframe().f_lineno, debug_info["debug"])
+
+
+# 主入口函数
 def git_func_main():
     """主入口函数"""
-    filter_issues(pick_keys=["url", "title", "body", "labels"])
+    # 抓取 issues
+    issues = git_func_issues()
+    # 筛选数据
+    items = filter_issues(issues)
+    # 对于每个 issue，提取信息
+    for item in items:
+        new_item = {}
+        new_item["issues_title"] = item["title"]
+        new_item["issues_url"] = item["html_url"]
+        new_item["note_data"] = [extract_info(item["body"])]
+        # 抓取 issue comments
+        comments = git_func_issues(item["comments_url"])
+        # 筛选数据
+        comments = filter_issues(comments, "comments")
+        # 对于每个 issue comment，提取信息
+        for comment in comments:
+            new_item["note_data"].append(extract_info(comment["body"]))
+        # 计数
+        new_item["note_count"] = len(new_item["note_data"])
+        # 保存数据到文件
+        save_data(new_item)

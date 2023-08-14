@@ -39,6 +39,9 @@ def init():
         with open("dev_config.json", "rb") as config_file:
             config_info = json.loads(config_file.read())
 
+    # data 路径
+    config_info["DATA_PATH"] = os.path.join(os.getcwd(), "data/")
+
     # 读取 debug 配置
     if "DEBUG" in config_info.keys() and config_info["DEBUG"]:
         debug_info["debug"] = True
@@ -47,6 +50,9 @@ def init():
             inspect.currentframe().f_lineno,
             debug_info["debug"],
         )
+
+    if debug_info["debug"]:
+        config_info["DATA_PATH"] = os.path.join(os.getcwd(), "dev_data/")
 
 
 # 初始化调用
