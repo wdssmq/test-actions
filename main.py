@@ -30,6 +30,9 @@ def init():
         if os.environ["GIT_TOKEN"]:
             config_info["GIT_TOKEN"] = os.environ["GIT_TOKEN"]
 
+        if os.environ["PICK_LABEL"]:
+            config_info["PICK_LABEL"] = os.environ["PICK_LABEL"]
+
     except KeyError:
         fnLog("无法获 github 的 secrets 配置信息，开始使用本地变量")
         fnLog(
