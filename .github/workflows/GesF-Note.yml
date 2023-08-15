@@ -4,9 +4,9 @@ on:
   #   - cron: "0 */137 * * *"
   issue_comment:
     types: [created, deleted, edited]
-  # push:
-  #   branches:
-  #     - act-GesF-Note
+  push:
+    branches:
+      - act-GesF-Note
   workflow_dispatch:
 
 jobs:
