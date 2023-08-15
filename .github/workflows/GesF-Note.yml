@@ -24,12 +24,13 @@ jobs:
         with:
           python-version: '3.10'
       # Build Data
-      - name: Post
+      - name: Build Data
         env:
           PICK_LABEL: ${{ secrets.PICK_LABEL }}
           GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_REPO: ${{ github.repository }}
         run: |
+          pip install pyyaml requests
           python3 main.py
       # Commit Changes To Git
       - name: Commit files
