@@ -2,16 +2,16 @@ issues_title: 2023-08
 issues_url: https://github.com/wdssmq/test-actions/issues/5
 note_count: 2
 note_data:
-- Desc: 除了本站所在的机子外，还另外有两台半 VPS，那半台因为是 NAT 在写本文时仍然在吃灰，剩下两台姑且按侧重承担了些任务；...
+- Desc: 除了本站所在的机子外，还另外有两台半 VPS，那半台因为是 NAT 在写本文时仍然在吃灰，剩下两台姑且按侧重……
   Source: '[url=https://www.wdssmq.com]沉冰浮水的博客[/url]'
-  Tags: null
+  Tags: 折腾, Web, Docker, 备忘
   Title: 「折腾」Docker 部署 Caddy
   Type: 文章
   Url: https://www.wdssmq.com/post/20100717821.html
 - Desc: 简要 有给各种网页写「GM_脚本」，姑且有弄「热重载」机制方便开发，但是一些网页的 CSP 策略不允许引入外部脚本，浏览器里也有临时禁用 CSP 的插件，但是并不总是管用，今天发现了一种浏览器自带的方法可以修改网站的「响应标头」，可以绕过网页自身的
     CSP 限制；...
   Source: '[url=https://www.wdssmq.com]沉冰浮水的博客[/url]'
-  Tags: null
+  Tags: 折腾, 浏览器, GM_脚本
   Title: 「折腾」使用浏览器自带功能修改网站「响应标头」
   Type: 文章
   Url: https://www.wdssmq.com/post/20120902324.html
