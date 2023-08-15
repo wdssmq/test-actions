@@ -1,7 +1,7 @@
 """ GitHub 数据处理 """
 import inspect
-import yaml
 import re
+import yaml
 
 from bin.base import fnBug
 from bin.http_func import http_git_issues, http_git_issues_comments
@@ -27,10 +27,10 @@ def git_func_issues(comments_url=None):
         issues = http_git_issues(
             config_info["PICK_LABEL"],
             config_info["GIT_REPO"],
-            config_info["GITHUB_TOKEN"],
+            config_info["GIT_TOKEN"],
         )
     else:
-        issues = http_git_issues_comments(comments_url, config_info["GITHUB_TOKEN"])
+        issues = http_git_issues_comments(comments_url, config_info["GIT_TOKEN"])
     return issues
 
 

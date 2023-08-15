@@ -27,6 +27,9 @@ def init():
         if os.environ["GIT_REPO"]:
             config_info["GIT_REPO"] = os.environ["GIT_REPO"]
 
+        if os.environ["GIT_TOKEN"]:
+            config_info["GIT_TOKEN"] = os.environ["GIT_TOKEN"]
+
     except KeyError:
         fnLog("无法获 github 的 secrets 配置信息，开始使用本地变量")
         fnLog(
