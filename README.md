@@ -8,7 +8,7 @@
 
 ```yaml
 - title: 作品标题
-  description: 作品描述
+  desc: 作品描述
   image: 作品图片
   source: 作品来源
   tags: 作品标签
