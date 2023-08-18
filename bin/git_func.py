@@ -5,6 +5,7 @@ import json
 import yaml
 
 from bin.base import fnBug
+from bin.md_func import save_md
 from bin.http_func import http_git_issues, http_git_issues_comments
 
 # 全局变量
@@ -102,3 +103,4 @@ def git_func_main():
         # 保存数据到文件
         save_data(new_item, "yml")
         save_data(new_item, "json")
+        save_md(new_item, config_info["MD_PATH"], debug_info["debug"])
