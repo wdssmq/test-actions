@@ -57,13 +57,13 @@ note_data:
   Title: 「水坑」Z-BlogPHP 接口本质之「PHP 可变函数」
   Type: 文章
   Url: https://www.wdssmq.com/post/20220409155.html
-- Desc: 则是「重定向（301）」，虽然可以理解为带有 301 标志的 Rewrite（？）； 为什么叫「水坑」见： 「水坑…
+- Desc: url 理论上指向的是一个文件，即使是目录也会按默认设置寻找 index.html 或 index.php，不存在…
   Source: '[url=https://www.wdssmq.com]沉冰浮水的博客[/url]'
-  Tags: GesF-Force, PHP, Rewrite
+  Tags: GesF-Force, Rewrite, PHP
   Title: 「水坑」略深入的讲解伪静态相关的知识
   Type: 文章
   Url: https://www.wdssmq.com/post/20190704012.html
-- Desc: ttps://www.wdssmq.com/post/20210723266.html 为什么叫「水坑」见： 「水…
+- Desc: 例行中二时间 好像确实会不少东西，然而日常不知道有什么意义；...
   Source: '[url=https://www.wdssmq.com]沉冰浮水的博客[/url]'
   Tags: GesF-Force, Z-BlogPHP, PHP
   Title: 「水坑」Z-BlogPHP 模板机制讲解「简易版」
