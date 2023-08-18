@@ -1,6 +1,7 @@
 """ GitHub 数据处理 """
 import inspect
 import re
+import json
 import yaml
 
 from bin.base import fnBug
@@ -63,13 +64,16 @@ def extract_info(body):
 
 
 # 保存数据到文件
-def save_data(data):
+def save_data(data, file_type="yml"):
     """保存数据到文件"""
-    file_name = data["issues_title"].replace(" ", "_") + ".yml"
+    file_name = data["issues_title"].replace(" ", "_") + f".{file_type}"
     file_path = config_info["DATA_PATH"] + file_name
     # 保存到文件
     with open(file_path, "w", encoding="utf-8") as file:
-        yaml.dump(data, file, allow_unicode=True)
+        if file_type == "yml":
+            yaml.dump(data, file, allow_unicode=True)
+        elif file_type == "json":
+            json.dump(data, file, ensure_ascii=False, indent=4)
     fnBug(f"保存文件：{file_path}", inspect.currentframe().f_lineno, debug_info["debug"])
 
 
@@ -96,4 +100,5 @@ def git_func_main():
         # 计数
         new_item["note_count"] = len(new_item["note_data"])
         # 保存数据到文件
-        save_data(new_item)
+        save_data(new_item, "yml")
+        save_data(new_item, "json")
