@@ -61,6 +61,7 @@ def init():
 
     if debug_info["debug"]:
         config_info["DATA_PATH"] = os.path.join(os.getcwd(), "dev_data/")
+        config_info["MD_PATH"] = os.path.join(os.getcwd(), "dev_data/")
 
 
 # 初始化调用
