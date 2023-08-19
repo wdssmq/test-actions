@@ -2,10 +2,13 @@
 export interface Props {
 	content: string;
 }
+import { marked } from 'marked';
 
 const { content } = Astro.props;
+const html = marked(content);
 ---
+
 <!-- 截取摘要 -->
 {
-    content.replace(/<[^>]+>/g, '').substring(0, 200)
+    html.replace(/<[^>]+>/g, '').substring(0, 73)
 }
