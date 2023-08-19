@@ -17,6 +17,10 @@ md_body_tpl = """
 `{tags}` / {source_link}\n
 """
 
+md_issues_tpl = """
+> 数据源: {issues_url} / 计数: {note_num}\n
+"""
+
 
 # 修复错误的 … 符号为 ……
 def fix_ellipsis(text):
@@ -42,6 +46,7 @@ def ubb_link(text):
     match = re.search(regex, text)
     if match:
         return md_link(match.group(2), match.group(1))
+    return text
 
 
 # 保存为 md 文件
@@ -51,16 +56,18 @@ def save_md(data, md_path, debug=False):
     file_path = md_path + file_name
     # meta data
     meta_data = {
-        "title": data["issues_title"],
+        "title": f"第 {data['issues_title']} 期",
         "pubDate": data["issues_title"],
-        "description": "description",
+        "description": f"第 {data['issues_title']} 期",
         "heroImage": "/placeholder-hero.jpg",
     }
     # markdown content
     md_content = md_head_tpl.format(**meta_data) + "\n"
 
     # issues_url
-    md_content += md_link(data["issues_title"], data["issues_url"]) + "\n"
+    issues_url = md_link(data["issues_title"], data["issues_url"])
+    note_num = len(data["note_data"])
+    md_content += md_issues_tpl.format(issues_url=issues_url, note_num=note_num)
 
     for note in data["note_data"]:
         note["Desc"] = fix_ellipsis(note["Desc"])
