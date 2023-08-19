@@ -2,7 +2,7 @@ import logo from "@/theme-simple/assets/media/logo.png";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 const today = new Date();
-const copy = `© ${today.getFullYear()} YOUR NAME HERE.`;
+const copy = `©${today.getFullYear()} 沉冰浮水`;
 
 export const config = {
     site: {
