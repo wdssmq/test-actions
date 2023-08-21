@@ -9,7 +9,7 @@ export const config = {
         title: SITE_TITLE,
         description: SITE_DESCRIPTION,
         favicon: "/favicon.ico",
-        image: "/placeholder-social.jpg",
+        image: "/placeholder-hero.jpg",
         copy: copy,
         locales: "zh-CN", // 'en-us'
     },
