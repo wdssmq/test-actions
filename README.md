@@ -21,29 +21,4 @@
 
 ## 如何提交
 
-请按模板提交 ISSUE；
-
-https://github.com/wdssmq/test-actions/issues
-
-
-```markdown
-
-    ```yml
-    # 前后的 源码块标记也要带上
-    name: 昵称标识
-    id: GitHub ID
-    site:
-        site_name: 站点名称
-        site_url: 站点地址
-        site_rss: 站点 RSS 地址
-        site_desc: 站点描述
-    app:
-        - app_name: 应用名称
-          app_desc: 应用描述
-          app_type: [plugin|theme] # 插件或者主题
-          app_url: Git 仓库地址
-        # 可以有多个 app
-
-    ```
-
-```
+请通过 [Issue](https://github.com/wdssmq/test-actions/issues/new/choose "提交 Issue") 提交你的站点信息；

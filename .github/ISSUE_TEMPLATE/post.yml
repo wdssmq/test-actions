@@ -3,10 +3,10 @@ description: 申请收录
 title: "[申请收录]: "
 labels: ["申请收录", "待处理"]
 body:
-#   - type: markdown
-#     attributes:
-#       value: |
-#         Thanks for taking the time to fill out this bug report!
+  - type: markdown
+    attributes:
+      value: |
+        上方标题内：`[申请收录]: 站点名 - id`；
   - type: textarea
     id: yml-data
     attributes:
@@ -17,17 +17,17 @@ body:
             ```yml
             # 前后的 源码块标记也要带上
             name: 昵称标识
-            id: GitHub ID
+            id: 默认为 GitHub ID
             site:
                 site_name: 站点名称
+                site_desc: 站点描述
                 site_url: 站点地址
                 site_rss: 站点 RSS 地址
-                site_desc: 站点描述
             app:
                 - app_name: 应用名称
-                app_desc: 应用描述
-                app_type: [plugin|theme] # 插件或者主题
-                app_url: Git 仓库地址
+                  app_desc: 应用描述
+                  app_type: [plugin|theme] # 插件或者主题
+                  app_url: Git 仓库地址
                 # 可以有多个 app
 
             ```
